@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.grid-container {
+    padding: 20px 135px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 50px minmax(80vh, 2fr) minmax(25px, 0.1fr)  50px ;
+}
+
+.grid-item {
+    border: 1px dashed blue;
+    border-collapse: collapse;
+}
+
+.header {
+    grid-column: 1 / span3;
+}
+
+.left-content {
+    grid-column: 1 / 2;
+    grid-row: 2 /  4;
+}
+
+.main-content {
+    grid-column: 2 / 3;
+}
+
+.right-content {
+    grid-column: 3 / 4;
+    grid-row: 2 /  4;
+}
+
+.sub-content {
+    grid-column: 2 / 3;
+}
+
+.footer {
+    grid-column: 1/ span3;
+}
