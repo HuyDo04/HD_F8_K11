@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #191228;
+    overflow: hidden;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.heart {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    background-color: red;
+    box-shadow: rgba(0, 0, 0, 0.3) 19px 0px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    transform: rotate(45deg);
+    animation: heartRate alternate 1s infinite;
+}
+
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    top: 0;
+    right: 50%;
+    border-radius: 50%;
+}
+
+.heart::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    top: -50%;
+    right: 0;
+    border-radius: 50%;
+}
+
+@keyframes heartRate {
+    0% {
+        transform: rotate(45deg) scale(1);
+    }
+    100% {
+        transform: rotate(45deg) scale(1.2);
+    }
+}
