@@ -3,7 +3,7 @@ function conditionIsTriangle() {
     let b = parseFloat(prompt("Nhập cạnh thứ hai: "));
     let c = parseFloat(prompt("Nhập cạnh thứ ba: "));
 
-    if (isNaN(a) || isNaN(b) || isNaN(c) || a <= 0 || b <= 0 || c <= 0) {
+    if (isNaN(a) || isNaN(b) || isNaN(c) || a <= 0 || b <= 0 || c <= 0 || a === Infinity || a === -Infinity || b === Infinity || b === -Infinity || c === Infinity || c === -Infinity) {
         return `Không hợp lệ. Yêu cầu nhập lại`;
     }
     if (a + b > c && a + c > b && b + c > a) {

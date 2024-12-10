@@ -1,6 +1,6 @@
 function calcTax() {
   let wage = parseFloat(prompt("Nhập tiền lương (triệu đồng): "));
-  if (wage <= 0 || isNaN(wage)) {
+  if (wage <= 0 || isNaN(wage) || wage === Infinity || wage === -Infinity) {
     return `Số tiền nhập vào không hợp lệ. Vui lòng nhập lại`
   }
   console.log("Tiền lương của bạn là: "+ wage +" triệu đồng");

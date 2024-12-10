@@ -1,7 +1,7 @@
 function calcBMI () {
     let weight = parseFloat(prompt("Nhập cân nặng: "));
     let height = parseFloat(prompt("Nhập chiều cao: "));
-    if(weight <= 0 || height <= 0 || isNaN(weight) || isNaN(height)) {
+    if(weight <= 0 || height <= 0 || isNaN(weight) || isNaN(height) || height === Infinity || height === -Infinity ||weight === Infinity || weight === -Infinity) {
         return ` Dữ liệu không hợp lệ. Yêu cầu nhập lại.`;
     }
     console.log("Cân nặng: " + weight);

@@ -1,6 +1,6 @@
 function calcElectricityBill() {
     let kwh = parseFloat(prompt("Nhập số điện(kwh): "));
-    if(kwh <= 0 || isNaN(kwh)) {
+    if(kwh <= 0 || isNaN(kwh) || kwh === Infinity || kwh === -Infinity ) {
         return `Số điện không hợp lệ. Vui lòng nhập lại.`;
     }
     console.log("Số điện của bạn là: " + kwh + "kwh");
