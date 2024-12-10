@@ -4,16 +4,19 @@ function calcTax() {
     return `Số tiền nhập vào không hợp lệ. Vui lòng nhập lại`
   }
   console.log("Tiền lương của bạn là: "+ wage +" triệu đồng");
-  if(wage <= 11) {
+  let tax = 0;
+  if (wage <= 11) {
     return `Không tính thuế`;
-  } else if(wage > 11 && wage <= 25) {
-    return `Thuế của bạn là : ${wage * 0.05} triệu đồng`; 
+  } else if (wage > 11 && wage <= 25) {
+    tax = (wage - 11) * 0.05;
   } else if (wage > 25 && wage <= 50) {
-    return `Thuế của bạn là : ${wage * 0.1} triệu đồng`; 
+    tax = (25 - 11) * 0.05 + (wage - 25) * 0.1;
   } else if (wage > 50 && wage <= 80) {
-    return `Thuế của bạn là : ${wage * 0.2} triệu đồng`;
+    tax = (25 - 11) * 0.05 + (50 - 25) * 0.1 + (wage - 50) * 0.2;
   } else {
-    return `Thuế của bạn là : ${wage * 0.3} triệu đồng`;
+    tax = (25 - 11) * 0.05 + (50 - 25) * 0.1 + (80 - 50) * 0.2 + (wage - 80) * 0.3;
   }
+  return `Tiền thuế của bạn là: ${tax} triệu đồng.`;
 }
 console.log(calcTax());
+
