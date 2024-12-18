@@ -7,41 +7,34 @@ const students = [
     { name: "Hoang Thi F", score: 6 },
   ];
   
-let highest = students[0];
-let lowest = students[0];
-const groups = { A: [], B: [], C: [], D: [] };
-
-function maxScore () {
+  function analyzeStudents(students) {
+    let highest = students[0];
+    let lowest = students[0];
+    const groups = { A: [], B: [], C: [], D: [] };
+  
     for (let i = 0; i < students.length; i++) {
-        if(students[i].score > highest.score) {
-            highest = students[i];
-        }
+      const student = students[i];
+      if (student.score > highest.score) highest = student;
+      if (student.score < lowest.score) lowest = student;
+  
+      if (student.score >= 8) {
+        groups.A.push(student);
+      } else if (student.score >= 6) {
+        groups.B.push(student);
+      } else if (student.score >= 4) {
+        groups.C.push(student);
+      } else {
+        groups.D.push(student);
+      }
     }
-    return {highest};
-}
-
-function minScore () {
-    for (let i = 0; i < students.length; i++) {
-        if(students[i].score < lowest.score) {
-            lowest = students[i];
-        }
-    }
-    return {lowest};
-}
-
-function groupStudents () {
-    for (let i = 0; i < students.length; i++) {
-        if(students[i].score >= 8) {
-            groups.A.push(students[i]);
-        } else if (students[i].score >= 6) {
-            groups.B.push(students[i]);
-        } else if (students[i].score >= 4) {
-            groups.C.push(students[i]);
-        }else {
-            groups.D.push(students[i]);
-        }
-    }
-    return {groups};
-}
-
-console.log(maxScore(), minScore(), groupStudents());
+  
+    return {
+      highest,
+      lowest,
+      group: groups,
+    };
+  }
+  
+  const result = analyzeStudents(students);
+  console.log(result);
+  
