@@ -57,6 +57,10 @@ const categories = [
 ];
 
 function arrayNested(arr) {
+	if(!Array.isArray(arr) || arr.length === 0) {
+        return `Khong hop le`;
+    }
+
     const map = {};
     const result = [];
 
@@ -77,8 +81,6 @@ function arrayNested(arr) {
 
     return result;
 }
-
-
 
 const categoriesNested = arrayNested(categories);
 console.log(categoriesNested);
