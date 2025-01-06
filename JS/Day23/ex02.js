@@ -65,7 +65,6 @@ function flattenCategories(categories,  level = 0){
 
 console.log(flattenCategories(categories));
 
-
 function getCategoryName(categories, categoryId) {
 
     const newGetCategoryName = flattenCategories(categories);

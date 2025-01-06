@@ -5,19 +5,19 @@ Năm 2015:ECMAScript 6 (ES6) ra đời,là phiên bản lớn nhất của ECMAS
 Năm 2016 - nay:Các phiên bản ECMAScript mới được ra mắt liên tục,với nhiều cải tiến và tính năng mới.Cho đến nay javaScript đã trở thành một trong số những ngôn ngữ được ưa chuộng và sử dụng nhiều nhất thế giới.`;
 
 function printHighlight(content, keyword) {
-    if(!content || !keyword || typeof content !== "string" || typeof keyword !== "string") {
+    if(!content || !keyword || typeof content !== "string" || typeof keyword !== "string" || keyword.length > content.length) {
         return "Không hợp lệ";
     }
 
     let result = "";
 
-    content = content.toLowerCase();
-    keyword = keyword.toLowerCase();
+    let lowerContent = content.toLowerCase();
+    let lowerKeyword = keyword.toLowerCase();
 
     for(let i = 0; i< content.length; i++) {
 
-        if(content.indexOf(keyword,i) === i) {
-            result += `<b>${keyword}</b>`;
+        if(lowerContent.indexOf(lowerKeyword,i) === i) {
+            result +=  `<b>${content.slice(i, i + keyword.length)}</b>`;
             i += keyword.length - 1;
         } else {
             result += content[i];
@@ -36,41 +36,57 @@ console.log(printHighlight(jsContent, "javascript"));
 // Năm 2015:ECMAScript 6 (ES6) ra đời,là phiên bản lớn nhất của ECMAScript với nhiều cải tiến và tính năng được coi là vượt bậc.
 // Năm 2016 - nay: Các phiên bản ECMAScript mới được ra mắt liên tục, với nhiều cải tiến và tính năng mới.Cho đến nay <b>javaScript</b> đã trở thành một trong số những ngôn ngữ được ưa chuộng và sử dụng nhiều nhất thế giới.
 
-function fixContent(content) {
-    const punctuations = [".", ",", ";", ":", "!", "?"];
-    const specialCharacters = ["(", ")", "[", "]", "{", "}", "<", ">"];
-    let result = "";
+const fixContent = (content) => {
+    const punctuationMarks = [".", ",", ";", ":", "!", "?"];
+    const openParentheses = ["(", "[", "{", "<"];
+    const closeParentheses = [")", "]", "}", ">"];
+    let result = ""; // Chuỗi kết quả
+    let previousChar = ""; // Ký tự cuối cùng trong chuỗi kết quả
 
     for (let i = 0; i < content.length; i++) {
         const char = content[i];
 
-        // Dấu câu
-        if (punctuations.indexOf(char) !== -1) {
+        // Xử lý dấu câu
+        if (punctuationMarks.includes(char)) {
             result += char;
-            if (content[i + 1] !== " ") {
+            if (result[result.length - 1] !== " " && i + 1 < content.length && content[i + 1] !== " ") {
                 result += " ";
             }
-        } 
- 
-        // Ký tự đặc biệt
-        else if (specialCharacters.indexOf(char) !== -1) {
-            if (char === "(" || char === "[" || char === "{" || char === "<") {
-                if (i > 0 && content[i - 1] !== " ") {
-                    result += " ";
-                }
-                result += char;
-            } else {
-                result += char;
-                if (content[i + 1] !== " " ) {
-                    result += " ";
-                }
+        }
+        // Xử lý ký tự đặc biệt mở
+        else if (openParentheses.includes(char)) {
+            if (previousChar !== " ") {
+                result += " ";
             }
-        } 
+            result += char;
+        }
+        // Xử lý ký tự đặc biệt đóng
+        else if (closeParentheses.includes(char)) {
+            result += char;
+            if (i + 1 < content.length && content[i + 1] !== " ") {
+                result += " ";
+            }
+        }
+        // Xử lý khoảng trắng dư thừa
+        else if (char === " ") {
+            if (previousChar !== " ") {
+                result += char;
+            }
+        }
+        // Các ký tự khác
         else {
             result += char;
         }
+
+        // Cập nhật ký tự cuối cùng của chuỗi kết quả
+        previousChar = result[result.length - 1];
     }
-    return result;
-}
+
+    // Loại bỏ khoảng trắng thừa ở đầu và cuối chuỗi
+    return result.trim();
+};
+
+// Kiểm tra
 
 console.log(fixContent(printHighlight(jsContent, "javascript")));
+
